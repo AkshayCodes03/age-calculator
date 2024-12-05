@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from "react";
+import { useEffect } from "react";
 
 export default function AgeCalculator() {
   const [birthDate, setBirthDate] = useState("");
@@ -22,6 +22,20 @@ export default function AgeCalculator() {
 
     setAge(calculatedAge);
   };
+
+  // Send the height of the iframe content to the parent window
+  const sendHeight = () => {
+    const height = document.body.scrollHeight;
+    window.parent.postMessage({ iframeHeight: height }, "*");
+  };
+
+  useEffect(() => {
+    sendHeight(); // Send height on component load
+    window.addEventListener("resize", sendHeight); // Update height on resize
+    return () => {
+      window.removeEventListener("resize", sendHeight);
+    };
+  }, [age, birthDate]);
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-6">
