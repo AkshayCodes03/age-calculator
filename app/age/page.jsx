@@ -24,25 +24,29 @@ export default function AgeCalculator() {
   };
 
   return (
-    <div style={{ fontFamily: "Arial, sans-serif", padding: "20px", maxWidth: "400px", margin: "0 auto", border: "1px solid #ccc", borderRadius: "8px" }}>
-      <h2>Age Calculator</h2>
-      <input
-        type="date"
-        value={birthDate}
-        onChange={(e) => setBirthDate(e.target.value)}
-        style={{ padding: "10px", marginBottom: "10px", width: "100%", boxSizing: "border-box" }}
-      />
-      <button
-        onClick={calculateAge}
-        style={{ padding: "10px 20px", backgroundColor: "#0070f3", color: "white", border: "none", borderRadius: "4px", cursor: "pointer" }}
-      >
-        Calculate Age
-      </button>
-      {age !== null && (
-        <p style={{ marginTop: "10px", fontSize: "16px" }}>
-          {`Your age is: ${age} ${age === 1 ? "year" : "years"} old.`}
-        </p>
-      )}
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-6">
+      <div className="bg-white shadow-md rounded-lg p-8 max-w-md w-full">
+        <h2 className="text-2xl font-bold text-gray-800 mb-4 text-center">
+          Age Calculator
+        </h2>
+        <input
+          type="date"
+          value={birthDate}
+          onChange={(e) => setBirthDate(e.target.value)}
+          className="w-full p-3 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+        <button
+          onClick={calculateAge}
+          className="w-full bg-blue-500 text-white p-3 rounded-lg hover:bg-blue-600 transition"
+        >
+          Calculate Age
+        </button>
+        {age !== null && (
+          <p className="mt-4 text-center text-lg text-gray-700">
+            {`Your age is: ${age} ${age === 1 ? "year" : "years"} old.`}
+          </p>
+        )}
+      </div>
     </div>
   );
 }
